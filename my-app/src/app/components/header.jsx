@@ -1,46 +1,59 @@
-import React from 'react';
+import React from 'react'
+import {
+  BrowserRouter as Router,
+ Link
+} from 'react-router-dom'
+import {Button,Navbar,NavbarBrand,NavbarToggler,Nav, Dropdown,DropdownItem, DropdownToggle,DropdownMenu
+} from 'reactstrap'
 
-import { Navbar, Nav, NavItem, Button } from 'react-bootstrap';
 
 
+export default class Example extends React.Component {
+  constructor(props) {
+    super(props);
 
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      dropdownOpen: false
+    };
+  }
 
-var Header= React.createClass({
-  render: function(){
-    var active = false;
-    var links = this.props.links.map(function(link){
-      if(link.active){
-        active = true;
-      }
-      return (
-        <NavLink linkTo={link.linkTo} text={link.text} active={link.active} />
-      );
+  toggle() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
     });
+  }
+
+  render() {
     return (
-      <li className={"dropdown " + (active ? "active" : "")}>
-        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          {this.props.text}
-          <span className="caret"></span>
-        </a>
-        <ul className="dropdown-menu">
-          {links}
-        </ul>
-      </li>
+  <Router>
+     <div className="container">
+            <Navbar color="faded" light toggleable>
+         <NavbarToggler/>
+          <NavbarBrand href="/">Tistro Webiste</NavbarBrand>
+        
+            <Nav className="ml-auto" navbar>
+              
+             <Button outline color="info"> <Link to="/Home">Home</Link></Button>
+             <Button outline color="info"> <Link to="/Testmonials">Testmonials</Link></Button>
+             <Button outline color="info"> <Link to="/">Contact Us</Link></Button>
+               <Dropdown  isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+        <DropdownToggle outline color="info"caret>
+         LogIn/Register
+        </DropdownToggle>
+          <DropdownMenu>
+              <DropdownItem >LogIn</DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem>Register</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+              
+           </Nav>
+       </Navbar>
+     
+   
+    </div>
+  </Router>
     );
   }
-});
-
-var NavLink = React.createClass({
-  render: function(){
-    return(
-      <li className={(this.props.active ? "active" : "")}><a href={this.props.linkTo}>{this.props.text}</a></li>
-    );
-  }
-});
-
-
-// render NavBar
-React.render(
-  <NavBar {...navbar} />,
-  document.getElementById("navbar")
-);
+}

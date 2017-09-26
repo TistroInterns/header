@@ -3,26 +3,32 @@ import { Grid, Nav, NavItem } from 'react-bootstrap';
 
 function footer(/*props*/) {
   return (
-    <footer>
+    <footer  >
       <Grid>
-        <Nav justified>
+        <Nav justified className="container">
           <NavItem
             eventKey={1}>
-            Privacy policy
+            Downloads
           </NavItem>
           <NavItem
             eventKey={2}
             title="Item">
-            Terms & Conditions
+           FAQ
           </NavItem>
           <NavItem
             eventKey={3}>
-            Some other professional link
+           Testmonials
           </NavItem>
         </Nav>
         <div className="text-center small copyright">
+
           © Tistro Website 2017
+         <p> Contact us on:</p>
+         <p> Email:wessel@code-etal.tech</p>
+         <p> call:011 587 7898</p>
+         <p> Address: 2 Selbourne Rd, Fourways, Sandton </p>
         </div>
+
       </Grid>
     </footer>
   );
